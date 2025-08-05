@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DireHire - Find Skilled Workers Near You</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                        <i class="fas fa-hammer mr-2"></i>DireHire
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</a>
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Booth</a>
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Support</a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors">
+                        Find Workers
+                    </button>
+                    <button class="border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-4 py-2 rounded-lg transition-colors">
+                        Join as Worker
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</a>
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Booth</a>
+                    <a href="#" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Support</a>
+                    <div class="flex flex-col space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <button class="bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            Find Workers
+                        </button>
+                        <button class="border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-4 py-2 rounded-lg transition-colors">
+                            Join as Worker
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Search Bar -->
+    <section class="relative bg-gradient-to-r from-blue-600 to-purple-700 py-20">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                Find Skilled Workers Near You
+            </h1>
+            <p class="text-xl text-gray-200 mb-12 max-w-2xl mx-auto">
+                Connect with verified professionals for all your home and business needs
+            </p>
+
+            <!-- Search Bar -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <!-- Service Type -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Type</label>
+                        <select class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <option>All Services</option>
+                            <option>Carpenter</option>
+                            <option>Painter</option>
+                            <option>Plumber</option>
+                            <option>Electrician</option>
+                            <option>Cleaner</option>
+                            <option>Mason</option>
+                            <option>Gardner</option>
+                            <option>Cook</option>
+                        </select>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</label>
+                        <div class="relative">
+                            <input type="text" placeholder="Enter your location" class="w-full p-3 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <i class="fas fa-map-marker-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preferred Date</label>
+                        <input type="date" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Urgency -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Urgency</label>
+                        <select class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <option>Same Day</option>
+                            <option>Within Week</option>
+                            <option>Flexible</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="flex items-end">
+                        <button class="w-full bg-primary-500 hover:bg-primary-600 text-white p-3 rounded-lg font-semibold transition-colors flex items-center justify-center">
+                            <i class="fas fa-search mr-2"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filter Sidebar -->
+            <aside class="lg:w-1/4">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-24">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-900 dark:text-white">Filters</h3>
+
+                    <!-- Price Range -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Price Range</h4>
+                        <div class="space-y-2">
+                            <input type="range" min="0" max="1000" value="500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+                                <span>$0</span>
+                                <span>$1000+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Worker Rating -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Rating</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 flex items-center">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                    <span class="ml-1 text-sm text-gray-600 dark:text-gray-400">(5.0)</span>
+                                </span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 flex items-center">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                    <span class="ml-1 text-sm text-gray-600 dark:text-gray-400">(4.0+)</span>
+                                </span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 flex items-center">
+                                    <span class="text-yellow-400">★★★☆☆</span>
+                                    <span class="ml-1 text-sm text-gray-600 dark:text-gray-400">(3.0+)</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Service Type -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Service Type</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Carpenter</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Painter</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Plumber</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Electrician</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Mason</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Cleaner</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Experience Level -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Experience Level</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Beginner</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Intermediate</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Expert</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Availability</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Today</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Tomorrow</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">This Week</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Flexible</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Work Preference -->
+                    <div class="mb-6">
+                        <h4 class="font-medium mb-3 text-gray-700 dark:text-gray-300">Work Preference</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Solo Worker</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded text-primary-500 focus:ring-primary-500">
+                                <span class="ml-2 text-sm">Team/Group</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <button class="w-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                        Clear All Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Worker Listings -->
+            <main class="lg:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Available Workers</h2>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Showing 1-12 of 156 results</span>
+                        <select class="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                            <option>Sort by: Relevance</option>
+                            <option>Sort by: Rating</option>
+                            <option>Sort by: Price (Low to High)</option>
+                            <option>Sort by: Price (High to Low)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Worker Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Worker Card 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Worker" class="w-16 h-16 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">John Smith</h3>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Available Today</span>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400">Professional Carpenter</p>
+                                    <div class="flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Downtown, New York</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">4.9 (127 reviews)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-lg font-semibold text-gray-900 dark:text-white">$45/hr</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Furniture Making</span>
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Home Repair</span>
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Custom Cabinets</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid grid-cols-3 gap-2">
+                                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                </div>
+
+                                <div class="mt-4 flex space-x-3">
+                                    <button class="flex-1 bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                        Hire Now
+                                    </button>
+                                    <button class="flex-1 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white py-2 px-4 rounded-lg transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full font-semibold">Top Rated</span>
+                        </div>
+                    </div>
+
+                    <!-- Worker Card 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Worker" class="w-16 h-16 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Mike Johnson</h3>
+                                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Busy</span>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400">Expert Painter</p>
+                                    <div class="flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Brooklyn, New York</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">4.7 (89 reviews)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-lg font-semibold text-gray-900 dark:text-white">$38/hr</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Interior Painting</span>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Exterior Painting</span>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Wall Texturing</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid grid-cols-3 gap-2">
+                                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                </div>
+
+                                <div class="mt-4 flex space-x-3">
+                                    <button class="flex-1 bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                        Hire Now
+                                    </button>
+                                    <button class="flex-1 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white py-2 px-4 rounded-lg transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-blue-400 text-white text-xs px-2 py-1 rounded-full font-semibold">Verified</span>
+                        </div>
+                    </div>
+
+                    <!-- Worker Card 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Worker" class="w-16 h-16 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Sarah Wilson</h3>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Available Today</span>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400">Licensed Plumber</p>
+                                    <div class="flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Manhattan, New York</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">5.0 (156 reviews)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-lg font-semibold text-gray-900 dark:text-white">$52/hr</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Pipe Repair</span>
+                                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Bathroom Renovation</span>
+                                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Emergency Service</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid grid-cols-3 gap-2">
+                                    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1584622781564-1d987f7333c1?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                </div>
+
+                                <div class="mt-4 flex space-x-3">
+                                    <button class="flex-1 bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                        Hire Now
+                                    </button>
+                                    <button class="flex-1 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white py-2 px-4 rounded-lg transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full font-semibold">Top Rated</span>
+                        </div>
+                    </div>
+
+                    <!-- Worker Card 4 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-start space-x-4">
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face" alt="Worker" class="w-16 h-16 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">David Brown</h3>
+                                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Available Today</span>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400">Master Electrician</p>
+                                    <div class="flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        <span class="text-sm text-gray-600 dark:text-gray-400">Queens, New York</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">4.8 (203 reviews)</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-lg font-semibold text-gray-900 dark:text-white">$55/hr</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Wiring Installation</span>
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Panel Upgrades</span>
+                                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Smart Home Setup</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 grid grid-cols-3 gap-2">
+                                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                    <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=100&h=80&fit=crop" alt="Portfolio" class="rounded-lg object-cover h-16">
+                                </div>
+
+                                <div class="mt-4 flex space-x-3">
+                                    <button class="flex-1 bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                        Hire Now
+                                    </button>
+                                    <button class="flex-1 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white py-2 px-4 rounded-lg transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-blue-400 text-white text-xs px-2 py-1 rounded-full font-semibold">Verified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center items-center space-x-2">
+                    <button class="px-3 py-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="px-3 py-2 bg-primary-500 text-white rounded-lg">1</button>
+                    <button class="px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">2</button>
+                    <button class="px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">3</button>
+                    <button class="px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">4</button>
+                    <span class="px-3 py-2 text-gray-500 dark:text-gray-400">...</span>
+                    <button class="px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">13</button>
+                    <button class="px-3 py-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- For Customers -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">For Customers</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Find Workers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Service Categories</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Customer Reviews</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Safety & Trust</a></li>
+                    </ul>
+                </div>
+
+                <!-- For Workers -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">For Workers</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Join as Worker</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Worker Resources</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Worker Guidelines</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Payment Info</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Live Chat</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Report Issue</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="text-2xl font-bold text-primary-400 mr-8">
+                            <i class="fas fa-hammer mr-2"></i>DireHire
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="text-gray-400 text-sm">
+                        © 2024 DireHire. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Dark mode toggle (optional)
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
